@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bewerbungsbot - Web Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .drop-zone { border: 2px dashed #4b5563; transition: all 0.3s; }
+        .drop-zone.dragover { border-color: #3b82f6; background-color: rgba(59, 130, 246, 0.1); }
+        .log-container {
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+
+<div class="max-w-5xl mx-auto p-6">
+    <header class="flex items-center justify-between mb-8 pb-4 border-b border-gray-800">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center text-2xl shadow-lg shadow-brand-500/30">
+                🤖
+            </div>
+            <div>
+                <h1 class="text-2xl font-bold text-white">Bewerbungsbot</h1>
+                <p class="text-gray-400 text-sm">Automatisierter E-Mail-Versand leicht gemacht</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-400">
+            <span class="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Lokal & Sicher
+        </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Left Column: Configuration & Uploads -->
+        <div class="space-y-6">
+            
+            <!-- Config Card -->
+            <div class="bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-700/50">
+                <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <i class="fas fa-cog text-brand-500"></i> Konfiguration
+                </h2>
+                <form id="configForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">E-Mail Adresse (Google)</label>
+                        <input type="email" id="email" value="{{ env_data['EMAIL_USER'] }}" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500 transition-colors" placeholder="max.mustermann@gmail.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">App-Passwort</label>
+                        <input type="password" id="password" value="{{ env_data['EMAIL_PASS'] }}" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-brand-500 transition-colors" placeholder="16-stelliges Passwort">
+                        <p class="text-xs text-gray-500 mt-1"><a href="https://myaccount.google.com/apppasswords" target="_blank" class="text-brand-500 hover:underline">Hier App-Passwort erstellen</a></p>
+                    </div>
+                    <div class="flex items-center gap-2 mt-2">
+                        <input type="checkbox" id="sendReal" {% if env_data['SEND_REAL_EMAILS'] == 'True' %}checked{% endif %} class="w-4 h-4 text-brand-500 bg-gray-900 border-gray-700 rounded focus:ring-brand-500">
+                        <label class="text-sm text-gray-300">Echte E-Mails versenden (Sonst Test-Modus)</label>
+                    </div>
+                    <button type="submit" class="w-full bg-gray-700 hover:bg-gray-600 text-white rounded-lg px-4 py-2 text-sm font-medium transition-colors">
+                        Speichern
+                    </button>
+                </form>
+            </div>
+
+            <!-- Upload CV Card -->
+            <div class="bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-700/50">
+                <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <i class="fas fa-file-pdf text-red-400"></i> Lebenslauf / Zeugnisse
+                </h2>
+                <div id="cvDropZone" class="drop-zone rounded-xl p-8 text-center cursor-pointer hover:bg-gray-700/50">
+                    <i class="fas fa-cloud-upload-alt text-3xl text-gray-500 mb-3"></i>
+                    <p class="text-sm font-medium">PDF hier ablegen oder klicken</p>
+                    <p class="text-xs text-gray-500 mt-1">Nur .pdf Dateien</p>
+                    <input type="file" id="cvInput" class="hidden" accept=".pdf">
+                </div>
+                <div id="cvStatus" class="mt-3 text-sm hidden"></div>
+            </div>
+
+            <!-- Upload Anzeigen Card -->
+            <div class="bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-700/50">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold flex items-center gap-2">
+                        <i class="fas fa-briefcase text-yellow-500"></i> Stellenanzeigen
+                    </h2>
+                    <button id="clearAnzeigenBtn" class="text-xs text-red-400 hover:text-red-300 transition-colors">Alle löschen</button>
+                </div>
+                <div id="anzeigenDropZone" class="drop-zone rounded-xl p-8 text-center cursor-pointer hover:bg-gray-700/50">
+                    <i class="fas fa-file-code text-3xl text-gray-500 mb-3"></i>
+                    <p class="text-sm font-medium">HTML Anzeigen hier ablegen oder klicken</p>
+                    <p class="text-xs text-gray-500 mt-1">Mehrere HTML Dateien möglich</p>
+                    <input type="file" id="anzeigenInput" class="hidden" accept=".html,.htm" multiple>
+                </div>
+                <div id="anzeigenStatus" class="mt-3 text-sm hidden"></div>
+            </div>
+
+        </div>
+
+        <!-- Right Column: Console & Controls -->
+        <div class="flex flex-col h-full space-y-6">
+            
+            <div class="bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-700/50 flex-grow flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold flex items-center gap-2">
+                        <i class="fas fa-terminal text-green-400"></i> Bot Konsole
+                    </h2>
+                    <div id="botStatusBadge" class="px-2 py-1 rounded text-xs font-medium bg-gray-700 text-gray-300">Bereit</div>
+                </div>
+                
+                <div id="consoleOutput" class="log-container flex-grow bg-black rounded-xl p-4 text-sm text-green-400 border border-gray-700">
+Willkommen beim Bewerbungsbot! 🤖
+
+Schritt 1: Konfiguration prüfen und speichern.
+Schritt 2: Lebenslauf (.pdf) hochladen.
+Schritt 3: Gespeicherte Stellenanzeigen (.html) hochladen.
+Schritt 4: Auf "Bot Starten" klicken!
+</div>
+            </div>
+
+            <!-- Start Button -->
+            <button id="startBotBtn" class="w-full bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white rounded-2xl py-4 text-lg font-bold shadow-lg shadow-brand-500/25 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
+                <i class="fas fa-rocket"></i> Bewerbungsbot Starten
+            </button>
+            
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
