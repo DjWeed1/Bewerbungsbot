@@ -6,6 +6,15 @@
 
 ## 🇩🇪 Installation & Benutzung
 
+🔥 **NEU: Lokale Web-Oberfläche (Empfohlen)**
+Du kannst den Bot jetzt super einfach über eine moderne Web-Oberfläche in deinem Browser bedienen!
+1. Lade dir die Dateien aus diesem Repository herunter.
+2. Mache einen Doppelklick auf die Datei **`start_webui.bat`**.
+3. Dein Browser öffnet sich automatisch (auf `http://127.0.0.1:5000`).
+4. Du kannst deinen Lebenslauf und Stellenanzeigen per Drag & Drop reinziehen, deine Daten eintragen und den Bot per Knopfdruck starten!
+
+*(Wenn du den Bot lieber klassisch über das Terminal nutzen möchtest, folge der Anleitung unten:)*
+
 ### 1️⃣ Voraussetzungen
 *   **Python 3.11** ist bereits installiert ✅
 
@@ -75,6 +84,15 @@ Nun viel Glück! 😉
 ---
 
 ## 🇬🇧 Installation & Usage
+
+🔥 **NEW: Local Web UI (Recommended)**
+You can now easily control the bot using a modern web interface in your browser!
+1. Download the files from this repository.
+2. Double-click the **`start_webui.bat`** file.
+3. Your browser will open automatically (at `http://127.0.0.1:5000`).
+4. You can drag and drop your CV and job ads, enter your details, and start the bot with a single click!
+
+*(If you prefer to use the bot the classic way via the terminal, follow the instructions below:)*
 
 ### 1️⃣ Requirements
 *   **Python 3.11** is installed ✅
