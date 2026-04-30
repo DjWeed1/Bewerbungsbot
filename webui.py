@@ -3,7 +3,7 @@ import subprocess
 import threading
 import queue
 from flask import Flask, render_template, request, jsonify, Response
-from werkzeug.utils import secure_form_data, secure_filename
+from werkzeug.utils import secure_filename
 import time
 
 app = Flask(__name__)
