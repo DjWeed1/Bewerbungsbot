@@ -81,6 +81,22 @@ Bei Problemen kannst du mich gerne über WhatsApp oder Telegram kontaktieren: **
 Für weitere Fragen stehe ich auch in der WhatsApp-Gruppe zur Verfügung: [WhatsApp Gruppe beitreten](https://chat.whatsapp.com/EHw5Ahb4cUDDIEWZfiyI6x). 
 Nun viel Glück! 😉
 
+### 💡 Ideen & Wunschliste (Future Features)
+Das Projekt ist bereits jetzt eine enorme Hilfe, aber es gibt noch einige großartige Ideen, wie wir den Bot in Zukunft erweitern könnten:
+
+* **🤖 1. KI-generierte Anschreiben (Die "Killer-Funktion")**
+  Aktuell verschickt der Bot einen Standard-Text. Durch die Anbindung der OpenAI (ChatGPT) API könnte der Bot die hochgeladene Stellenanzeige analysieren und in Sekundenschnelle ein maßgeschneidertes, hochprofessionelles Anschreiben für genau diese Firma generieren!
+* **🕸️ 2. Automatisches Suchen (Scraping)**
+  Anstatt HTML-Dateien manuell zu speichern, könntest du in Zukunft nur noch *"Suche nach Verkäufer in Wien"* eingeben. Der Bot sucht automatisch auf Job-Portalen, sammelt z.B. 50 Anzeigen und bewirbt sich selbstständig!
+* **📊 3. Ein "Bewerbungs-Dashboard" in der Web-UI**
+  Eine visuelle Darstellung deiner `Bewerbungen.xlsx` direkt in der Web-Oberfläche. Du hättest ein kleines CRM-System, in dem du auf einen Blick Datum, Firmenname und Jobtitel siehst.
+* **📑 4. Mehrere Lebensläufe unterstützen**
+  Ein Dropdown-Menü in der Web-UI, mit dem du aus verschiedenen Lebensläufen (z.B. Variante A für Bürokraft, Variante B für Empfang) wählen kannst, bevor der Bot startet.
+
+> [!IMPORTANT]
+> **Du möchtest eines dieser Features nutzen?**
+> Wenn dir eine dieser Ideen gefällt und du sie in diesem Projekt haben möchtest, melde dich einfach bei mir unter **pierre.fikota@gmail.com** oder in unserer **[WhatsApp-Gruppe](https://chat.whatsapp.com/EHw5Ahb4cUDDIEWZfiyI6x)** und ich werde die Erweiterung erschaffen! 😊
+
 ---
 
 ## 🇬🇧 Installation & Usage
@@ -159,3 +175,19 @@ python Bewerbungsbot_Template.py
 If you have any problems, feel free to contact me via WhatsApp or Telegram: **+4367762127550** (Regards, Pierre).
 For more questions, I am also available in the WhatsApp group: [Join WhatsApp Group](https://chat.whatsapp.com/EHw5Ahb4cUDDIEWZfiyI6x).
 Now have fun and many good wishes for success! 😉
+
+### 💡 Ideas & Wishlist (Future Features)
+The project is already a huge help, but there are some great ideas on how we could expand the bot in the future:
+
+* **🤖 1. AI-Generated Cover Letters (The "Killer Feature")**
+  Currently, the bot sends a standard text. By connecting the OpenAI (ChatGPT) API, the bot could analyze the uploaded job ad and generate a tailor-made, highly professional cover letter for exactly that company in seconds!
+* **🕸️ 2. Automated Searching (Scraping)**
+  Instead of saving HTML files manually, you could just enter *"Search for sales assistant in Vienna"*. The bot would automatically search job portals, collect e.g. 50 ads, and apply on its own!
+* **📊 3. An "Application Dashboard" in the Web UI**
+  A visual representation of your `Bewerbungen.xlsx` directly in the web interface. You would have a small CRM system where you can see the date, company name, and job title at a glance.
+* **📑 4. Support for Multiple CVs**
+  A dropdown menu in the Web UI that lets you choose from different uploaded CVs (e.g. Variant A for office work, Variant B for reception) before the bot starts.
+
+> [!IMPORTANT]
+> **Do you want to use one of these features?**
+> If you like any of these ideas and want to have them in this project, simply contact me at **pierre.fikota@gmail.com** or in our **[WhatsApp Group](https://chat.whatsapp.com/EHw5Ahb4cUDDIEWZfiyI6x)** and I will build the extension! 😊
